@@ -1,0 +1,7 @@
+docker run \
+    --name postgre \
+    -e "POSTGRES_PASSWORD=1234" \
+    -e "POSTGRES_USER=admin" \
+    -e "POSTGRES_DB=tacodb" \
+    -v "$(pwd)/TacoDB:/var/lib/postgresql/data" \
+    -p 5432:5432 postgres

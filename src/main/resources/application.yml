@@ -4,8 +4,13 @@ spring:
     username: admin
     password: 1234
   jpa:
+    show-sql: true
     hibernate:
-      dll-auto: create-drop
+      ddl-auto: create-drop
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  security:
+    user:
+      name: admin
+      password: admin

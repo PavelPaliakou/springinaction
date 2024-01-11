@@ -1,8 +1,6 @@
 package sia.tacocloud.tacos.web;
 
 import jakarta.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +15,11 @@ import sia.tacocloud.tacos.repository.OrderRepository;
 @RequestMapping("/orders")
 @SessionAttributes("tacoOrder")
 public class OrderController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DesignTacoController.class);
-    private OrderRepository orderRepository;
 
-    public OrderController(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
+    private OrderRepository orderRepo;
+
+    public OrderController(OrderRepository orderRepo) {
+        this.orderRepo = orderRepo;
     }
 
     @GetMapping("/current")
@@ -30,17 +28,15 @@ public class OrderController {
     }
 
     @PostMapping
-    public String processOrder(@Valid TacoOrder tacoOrder, Errors errors,
-                               SessionStatus sessionStatus) {
-
+    public String processOrder(@Valid TacoOrder order, Errors errors, SessionStatus sessionStatus) {
         if (errors.hasErrors()) {
-            return "orderFrom";
+            return "orderForm";
         }
 
-        orderRepository.save(tacoOrder);
-        LOGGER.info("Order submitted: {}", tacoOrder);
+        orderRepo.save(order);
         sessionStatus.setComplete();
 
-        return "redirect:/orders/current";
+        return "redirect:/";
     }
+
 }
