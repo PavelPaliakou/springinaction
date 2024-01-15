@@ -14,3 +14,10 @@ spring:
     user:
       name: admin
       password: admin
+    oauth2:
+      client:
+        registration:
+          facebook:
+            clientId: <facebook client Id>
+            clientSecret: <facebook client secret>
+            scope: email, public_profile
