@@ -12,11 +12,14 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "Taco_Order")
 public class TacoOrder implements Serializable {
     private static final Long serialVersionID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @ManyToOne
+    private User user;
     @NotBlank(message = "Delivery name is required")
     private String deliveryName;
     @NotBlank(message = "Street is required")
@@ -67,6 +70,14 @@ public class TacoOrder implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Date getPlacedAt() {
